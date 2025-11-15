@@ -41,7 +41,7 @@
         // in your project's settings, rather than globally.
         "directories": [".env", "env", ".venv", "venv", ".fish", "fish"],
         // Can also be `csh`, `fish`, and `nushell`
-        "activate_script": "default"
+        "activate_script": "fish"
       }
     }
   }
