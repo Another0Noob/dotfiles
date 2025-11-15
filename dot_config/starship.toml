@@ -2,6 +2,7 @@
 
 format = """
 [](red)\
+$shell\
 $os\
 $username\
 [](bg:peach fg:red)\
@@ -56,6 +57,13 @@ CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
+
+[shell]
+disabled = false
+style = "bg:red fg:crust"
+format = '[$indicator]($style)'
+fish_indicator = '󰈺'
+bash_indicator = ''
 
 [username]
 show_always = false
