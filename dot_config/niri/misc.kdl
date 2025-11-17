@@ -4,8 +4,8 @@ hotkey-overlay {
 }
 
 cursor {
-    xcursor-theme "miku-blz"
-    xcursor-size 24
+    xcursor-theme "Hatsune-Miku"
+    xcursor-size 36
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
