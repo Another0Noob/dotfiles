@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
   "show_edit_predictions": false,
   "autosave": "on_window_change",
   "telemetry": {
@@ -14,7 +19,7 @@
     "metrics": false
   },
   "agent": {
-    "default_profile": "write",
+    "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini"
@@ -27,7 +32,7 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",
-    "light": "One Light",
+    "light": "Ayu Light",
     "dark": "Dracula"
   },
   "terminal": {
@@ -37,13 +42,23 @@
     },
     "detect_venv": {
       "on": {
-        // Default directories to search for virtual environments, relative
-        // to the current working directory. We recommend overriding this
-        // in your project's settings, rather than globally.
         "directories": [".env", "env", ".venv", "venv", ".fish", "fish"],
-        // Can also be `csh`, `fish`, and `nushell`
         "activate_script": "fish"
       }
     }
+  },
+  "auto_install_extensions": {
+    "html": true,
+    "toml": true,
+    "kdl": true,
+    "xml": true,
+    "csv": true,
+    "ini": true,
+    "dockerfile": true,
+    "make": true,
+    "fish": true,
+    "git-firefly": true,
+    "dracula": true,
+    "material-icon-theme": true
   }
 }
