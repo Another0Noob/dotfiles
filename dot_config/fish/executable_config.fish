@@ -30,3 +30,5 @@ set -gx PATH $PATH /home/migu/.lmstudio/bin
 set PATH $PATH /home/migu/.local/bin
 
 set PATH $PATH /home/migu/.cargo/bin
+
+set PATH $PATH /home/migu/go/bin
