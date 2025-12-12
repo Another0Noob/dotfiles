@@ -20,8 +20,7 @@ binds {
     Mod+E { spawn "dolphin"; }
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Mod+Z { spawn "firefox"; }
-    Mod+X { spawn "code"; }
-
+    Mod+X { spawn "zeditor"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
