@@ -7,6 +7,14 @@ window-rule {
 }
 
 window-rule {
+    match app-id="portal"
+
+    open-floating true
+    default-column-width { fixed 960; }
+    default-window-height { fixed 54250; }
+}
+
+window-rule {
     match app-id="^kitty$"
 
     opacity 0.95
