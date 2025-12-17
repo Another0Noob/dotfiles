@@ -1,7 +1,7 @@
 // Clipboard history
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 // Start the shell
-spawn-at-startup "dms" "run"
+// spawn-at-startup "dms" "run"
 // (Optional) replace with a polkit agent for escalation prompts
 // spawn-at-startup "polkit-kde-agent"
 
