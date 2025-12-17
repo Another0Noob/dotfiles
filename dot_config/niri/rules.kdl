@@ -11,7 +11,7 @@ window-rule {
 
     open-floating true
     default-column-width { fixed 960; }
-    default-window-height { fixed 54250; }
+    default-window-height { fixed 540; }
 }
 
 window-rule {
