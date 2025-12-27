@@ -37,8 +37,8 @@ end
 set -gx PATH $PATH /home/migu/.lmstudio/bin
 # End of LM Studio CLI section
 # Created by `pipx` on 2025-11-15 22:10:24
-set PATH $PATH /home/migu/.local/bin
-set PATH $PATH /home/migu/.cargo/bin
-set PATH $PATH /home/migu/go/bin
+set PATH $PATH ~/.local/bin
+set PATH $PATH ~/.cargo/bin
+set PATH $PATH ~/go/bin
 
 set -Ux EDITOR zeditor

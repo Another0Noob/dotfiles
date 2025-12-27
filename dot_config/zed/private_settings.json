@@ -8,26 +8,26 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "show_edit_predictions": false,
   "autosave": "on_window_change",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "agent": {
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5-mini"
+      "model": "gpt-5-mini",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "icon_theme": "Material Icon Theme",
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
@@ -36,19 +36,19 @@
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Dracula"
+    "dark": "Dracula",
   },
   "terminal": {
     "blinking": "terminal_controlled",
     "shell": {
-      "program": "fish"
+      "program": "fish",
     },
     "detect_venv": {
       "on": {
         "directories": [".env", "env", ".venv", "venv", ".fish", "fish"],
-        "activate_script": "fish"
-      }
-    }
+        "activate_script": "fish",
+      },
+    },
   },
   "auto_install_extensions": {
     "html": true,
@@ -59,9 +59,10 @@
     "ini": true,
     "dockerfile": true,
     "make": true,
+    "justfile": true,
     "fish": true,
     "git-firefly": true,
     "dracula": true,
-    "material-icon-theme": true
-  }
+    "material-icon-theme": true,
+  },
 }
