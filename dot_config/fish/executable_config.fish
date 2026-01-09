@@ -1,11 +1,3 @@
-function fish_prompt -d "Write out the prompt"
-    # This shows up as USER@HOST /home/user/ >, with the directory colored
-    # $USER and $hostname are set by fish, so you can just use them
-    # instead of using `whoami` and `hostname`
-    printf '%s@%s %s%s%s > ' $USER $hostname \
-        (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
-end
-
 function y
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
 	yazi $argv --cwd-file="$tmp"
@@ -14,6 +6,12 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+
+function apply-my-theme --on-variable=my_theme
+    fish_config theme choose $my_theme
+end
+
+set -U my_theme Catppuccin\ Mocha
 
 if status is-interactive # Commands to run in interactive sessions can go here
 
@@ -30,7 +28,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias ls 'eza -a --icons'
     alias cd 'z'
     alias h 'z ~'
-    alias chez 'z .local/share/chezmoi/'
+    alias chez 'z ~/.local/share/chezmoi/'
     alias add 'chezmoi re-add'
 
 end
@@ -39,13 +37,13 @@ end
 set -gx PATH $PATH /home/migu/.lmstudio/bin
 # End of LM Studio CLI section
 # Created by `pipx` on 2025-11-15 22:10:24
-set PATH $PATH ~/.local/bin
-set PATH $PATH ~/.cargo/bin
-set PATH $PATH ~/go/bin
+set -gx PATH $PATH ~/.local/bin
+set -gx PATH $PATH ~/.cargo/bin
+set -gx PATH $PATH ~/go/bin
 set -x PNPM_HOME ~/.local/share/pnpm
 
 if not contains $PNPM_HOME $PATH
     set -x PATH $PNPM_HOME $PATH
 end
 
-set -Ux EDITOR zeditor
+set -gx EDITOR zeditor

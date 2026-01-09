@@ -32,6 +32,8 @@ $character"""
 
 palette = 'catppuccin_mocha'
 
+# add_newline = false
+
 [os]
 disabled = true
 style = "bg:red fg:crust"
