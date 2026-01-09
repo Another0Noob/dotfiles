@@ -21,3 +21,11 @@ eval "$(starship init bash)"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/migu/.lmstudio/bin"
 # End of LM Studio CLI section
+
+# pnpm
+export PNPM_HOME="/home/migu/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

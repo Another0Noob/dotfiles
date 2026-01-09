@@ -20,7 +20,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
     # No greeting
     set fish_greeting
 
-    # Use starship
     starship init fish | source
     fzf --fish | source
     atuin init fish | source
@@ -30,6 +29,9 @@ if status is-interactive # Commands to run in interactive sessions can go here
     # Aliases
     alias ls 'eza -a --icons'
     alias cd 'z'
+    alias h 'z ~'
+    alias chez 'z .local/share/chezmoi/'
+    alias add 'chezmoi re-add'
 
 end
 
@@ -40,5 +42,10 @@ set -gx PATH $PATH /home/migu/.lmstudio/bin
 set PATH $PATH ~/.local/bin
 set PATH $PATH ~/.cargo/bin
 set PATH $PATH ~/go/bin
+set -x PNPM_HOME ~/.local/share/pnpm
+
+if not contains $PNPM_HOME $PATH
+    set -x PATH $PNPM_HOME $PATH
+end
 
 set -Ux EDITOR zeditor

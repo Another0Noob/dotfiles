@@ -50,6 +50,12 @@
       },
     },
   },
+  "languages": {
+    "JavaScript": {
+      "show_completions_on_input": true,
+      "enable_language_server": true,
+    },
+  },
   "auto_install_extensions": {
     "html": true,
     "toml": true,
