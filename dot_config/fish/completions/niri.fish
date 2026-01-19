@@ -206,6 +206,8 @@ complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcomman
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "off" -d 'Turn off the output'
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "on" -d 'Turn on the output'
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "mode" -d 'Set the output mode'
+complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "custom-mode" -d 'Set a custom output mode'
+complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "modeline" -d 'Set a custom VESA CVT modeline'
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "scale" -d 'Set the output scale'
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "transform" -d 'Set the output transform'
 complete -c niri -n "__fish_niri_using_subcommand msg; and __fish_seen_subcommand_from output" -a "position" -d 'Set the output position'
