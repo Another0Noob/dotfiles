@@ -23,6 +23,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     atuin init fish | source
     direnv hook fish | source
     zoxide init fish | source
+    batman --export-env | source
 
     # Aliases
     alias ls 'eza -a --icons'
