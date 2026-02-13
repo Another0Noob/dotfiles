@@ -1,10 +1,10 @@
 function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
 
 function apply-my-theme --on-variable=my_theme
@@ -18,19 +18,14 @@ if status is-interactive # Commands to run in interactive sessions can go here
     # No greeting
     set fish_greeting
 
+    abbreviations
+
     starship init fish | source
     fzf --fish | source
     atuin init fish | source
     direnv hook fish | source
     zoxide init fish | source
     batman --export-env | source
-
-    # Aliases
-    alias ls 'eza -a --icons'
-    alias cd 'z'
-    alias h 'z ~'
-    alias chez 'z ~/.local/share/chezmoi/'
-    alias add 'chezmoi re-add'
 
 end
 
@@ -47,4 +42,4 @@ if not contains $PNPM_HOME $PATH
     set -x PATH $PNPM_HOME $PATH
 end
 
-set -gx EDITOR zeditor
+set -gx EDITOR nvim

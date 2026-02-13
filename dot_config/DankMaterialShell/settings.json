@@ -180,7 +180,7 @@
     "size": 32,
     "niri": {
       "hideWhenTyping": false,
-      "hideAfterInactiveMs": 0
+      "hideAfterInactiveMs": 5000
     },
     "hyprland": {
       "hideOnKeyPress": false,
@@ -214,7 +214,7 @@
   "soundVolumeChanged": false,
   "soundPluggedIn": true,
   "acMonitorTimeout": 1800,
-  "acLockTimeout": 0,
+  "acLockTimeout": 900,
   "acSuspendTimeout": 3600,
   "acSuspendBehavior": 0,
   "acProfileName": "",
@@ -226,7 +226,7 @@
   "batteryChargeLimit": 100,
   "lockBeforeSuspend": false,
   "loginctlLockIntegration": true,
-  "fadeToLockEnabled": false,
+  "fadeToLockEnabled": true,
   "fadeToLockGracePeriod": 5,
   "fadeToDpmsEnabled": true,
   "fadeToDpmsGracePeriod": 5,
@@ -262,7 +262,7 @@
   "matugenTemplateKitty": true,
   "matugenTemplateFoot": false,
   "matugenTemplateAlacritty": true,
-  "matugenTemplateNeovim": true,
+  "matugenTemplateNeovim": false,
   "matugenTemplateWezterm": false,
   "matugenTemplateDgop": true,
   "matugenTemplateKcolorscheme": true,
@@ -292,7 +292,7 @@
   "lockScreenShowPasswordField": true,
   "enableFprint": false,
   "maxFprintTries": 3,
-  "lockScreenActiveMonitor": "all",
+  "lockScreenActiveMonitor": "DP-1",
   "lockScreenInactiveColor": "#000000",
   "lockScreenNotificationMode": 0,
   "hideBrightnessSlider": false,
@@ -327,7 +327,7 @@
     "suspend",
     "restart"
   ],
-  "powerMenuDefaultAction": "suspend",
+  "powerMenuDefaultAction": "poweroff",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
