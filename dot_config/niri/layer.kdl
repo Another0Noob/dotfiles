@@ -1,0 +1,23 @@
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// Block out sensitive components from screencasts
+layer-rule {
+    match namespace="^dms:clipboard$"
+
+    block-out-from "screencast"
+}
+
+// Match all DMS layers with a regex
+layer-rule {
+    match namespace=r#"^dms:.*"#
+
+    // Apply rules to all DMS components
+}

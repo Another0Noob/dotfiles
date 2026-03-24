@@ -1,0 +1,92 @@
+// terminal
+window-rule {
+    match app-id="^kitty$"
+
+    opacity 0.95
+    default-column-width {  proportion 0.5; }
+}
+
+window-rule {
+    match app-id="^com.mitchellh.ghostty$"
+
+    opacity 0.98
+}
+
+window-rule {
+    match title="(?i)bitwarden"
+    block-out-from "screencast"
+}
+
+window-rule {
+    match title="(?i)whatsapp"
+    block-out-from "screencast"
+}
+
+window-rule {
+    match app-id="signal"
+    block-out-from "screencast"
+}
+
+// fixes
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+window-rule {
+    match app-id="steam_app_0" title="^HoYoPlay$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
+}
+
+window-rule {
+    match app-id="osu!"
+    match is-focused=true
+
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="portal"
+
+    open-floating true
+    default-column-width { fixed 960; }
+    default-window-height { fixed 540; }
+}
+
+// DMS
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="Alacritty"
+    match app-id="zen"
+    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// Open DMS windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}
+
+
