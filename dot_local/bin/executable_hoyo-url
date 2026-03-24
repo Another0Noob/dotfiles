@@ -86,7 +86,7 @@ URL_ZENLESS() {
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # CHANGE THIS TO YOUR ACTUAL FILEPATH
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-PATH_GENSHIN=$HOME/.local/share/twintaillauncher/games/hk4e_global/xf0psin3yklcfypsodmx7e9a/GenshinImpact_Data/webCaches
+PATH_GENSHIN=$HOME/.local/share/Steam/steamapps/compatdata/2360334159/pfx/drive_c/Program\ Files/HoYoPlay/games/Genshin\ Impact\ game/GenshinImpact_Data/webCaches/
 PATH_ZENLESS=$HOME/Games/Files/ZenlessZoneZero\ Game/ZenlessZoneZero_Data/webCaches
 
 #═════════════════════════════
@@ -101,3 +101,4 @@ elif [[ $1 == z ]]; then
 else
   HELP_ME
 fi
+

@@ -5,26 +5,19 @@
 include "dms/binds_custom.kdl"
 
 include "input.kdl"
-include "outputs.kdl"
+// include "outputs.kdl"
 include "layout.kdl"
-include "animations.kdl"
-include "rules.kdl"
+// include "animations.kdl"
+include "window.kdl"
+include "layer.kdl"
 include "misc.kdl"
 include "environment.kdl"
 include "binds.kdl"
 
-include "dms/config.kdl"
+// include "dms/config.kdl"
 
-include "startup.kdl"
+// include "startup.kdl"
 
-
-// spawn-at-startup "arch-update" "--tray"
-
-// Dank keybinds
-// 1. These should not be in conflict with any pre-existing keybindings
-// 2. You need to merge them with your existing config if you want to use these
-// 3. You can change the keys to whatever you want, if you prefer something different
-// 4. For the increment/decrement ones you can change the steps to whatever you like too
 include "dms/colors.kdl"
 include "dms/layout.kdl"
 include "dms/alttab.kdl"
@@ -33,3 +26,5 @@ include "dms/binds.kdl"
 include "dms/cursor.kdl"
 
 include "dms/outputs.kdl"
+
+include "dms/windowrules.kdl"

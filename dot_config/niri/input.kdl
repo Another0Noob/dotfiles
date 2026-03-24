@@ -66,6 +66,5 @@ input {
     // focus-follows-mouse max-scroll-amount="95%"
     //
     tablet {
-        map-to-output "Samsung Electric Company LC27G7xT H4ZN702658"
     }
 }
