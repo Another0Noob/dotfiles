@@ -5,7 +5,11 @@ input {
     keyboard {
         xkb {
             layout "de"
+            {{ if eq .chezmoi.hostname "miku-os" }} 
             variant "us"
+            {{ else if eq .chezmoi.hostname "migu-os" }}
+            // variant "us"
+            {{ end }}
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 
@@ -32,10 +36,10 @@ input {
         // dwtp
         // drag false
         // drag-lock
-        // natural-scroll
+        natural-scroll
         // accel-speed 0.2
         accel-profile "flat"
-        // scroll-method "two-finger"
+        scroll-method "two-finger"
         // disabled-on-external-mouse
     }
 

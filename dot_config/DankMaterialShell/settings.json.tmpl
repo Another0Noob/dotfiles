@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.hostname "miku-os" -}}
+{{-   include "dot_config/DankMaterialShell/settings.json_miku" -}}
+{{- else if eq .chezmoi.hostname "migu-os" -}}
+{{-   include "dot_config/DankMaterialShell/settings.json_migu" -}}
+{{- end -}}
+
+
