@@ -9,7 +9,6 @@ function abbreviations
     abbr --add la 'eza --icons -lag'
     abbr --add tree 'eza --icons -T'
     abbr --add cat bat
-    abbr --add chezd 'z ~/.local/share/chezmoi/'
-    abbr --add cheza 'chezmoi re-add'
+    abbr --add chez 'z ~/.local/share/chezmoi/'
     abbr --add n nvim
 end
