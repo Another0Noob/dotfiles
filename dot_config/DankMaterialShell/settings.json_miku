@@ -222,7 +222,7 @@
   "dankLauncherV2UnloadOnClose": false,
   "useAutoLocation": false,
   "weatherEnabled": true,
-  "networkPreference": "wifi",
+  "networkPreference": "ethernet",
   "iconTheme": "candy-icons",
   "cursorSettings": {
     "theme": "Hatsune-Miku",
