@@ -1,21 +1,25 @@
 packages:
   linux:
-    yay:
+    core:
       - 'niri'
       - 'xwayland-satellite'
       - 'gnome-keyring'
       - 'xdg-desktop-portal-gnome'
       - 'xdg-desktop-portal-gtk'
-      - 'candy-icons-git'
-      - 'wl-clipboard'
       - 'dms-shell-bin'
       - 'quickshell-git'
+      - 'qt6ct-kde'
+      - 'greetd-dms-greeter-git'
       - 'wtype'
       - 'cava'
       - 'cups-pk-helper'
       - 'i2c-tools'
       - 'matugen'
       - 'power-profiles-daemon'
+      - 'candy-icons-git'
+      - 'wl-clipboard'
+
+    dots:
       - 'zoxide'
       - 'fd'
       - 'ripgrep-all'
@@ -26,12 +30,12 @@ packages:
       - 'chafa'
       - 'imagemagick'
       - 'poppler'
-      - 'qt6ct-kde'
       - 'localsend-bin'
-      - 'greetd-dms-greeter-git'
       - 'dsearch-bin'
       - 'neovim'
       - 'python-pynvim'
+      - 'tree-sitter-cli'
+      - 'lazygit'
       - 'btop'
       - 'atuin'
       - 'direnv'
