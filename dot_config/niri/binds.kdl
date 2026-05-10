@@ -20,8 +20,7 @@ binds {
     Mod+E { spawn "dolphin"; }
     Mod+S { spawn "ghostty" "-e" "fish" "-C" "y"; }
     Ctrl+Shift+Escape { spawn "ghostty" "-e" "btop"; }
-    Mod+Z { spawn "firefox"; }
-    Mod+X { spawn "zeditor"; }
+    Mod+X { spawn "firefox"; }
     Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

@@ -191,7 +191,7 @@ format = " in $duration "
 style = "bg:lavender"
 disabled = false
 show_notifications = false
-min_time = 10000
+min_time = 0
 min_time_to_notify = 45000
 
 [palettes.catppuccin_mocha]
