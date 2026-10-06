@@ -4,25 +4,33 @@
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "ViewSonic Corporation VG2448 V5E193900544" {
-    mode "1920x1080@59.934"
-    scale 1.0
-    transform "90"
-    position x=-1080 y=0
+output "GIGA-BYTE TECHNOLOGY CO., LTD. MO27Q28G 25362F005473" {
+    mode "2560x1440@279.961"
+    scale 1.15
+    position x=0 y=0
+    variable-refresh-rate on-demand=true
+    focus-at-startup
+    hot-corners {
+        off
+    }
 }
 
 output "LG Electronics LG ULTRAFINE 210MAFCPF547" {
     mode "3840x2160@60.000"
-    scale 1.6
-    transform "normal"
-    position x=2133 y=0
+    scale 1.65
+    position x=2226 y=57
+    hot-corners {
+        off
+    }
 }
 
-output "Samsung Electric Company LC27G7xT H4ZN702658" {
-    // main monitor
-    mode "2560x1440@239.958"
-    scale 1.2
-    transform "normal"
-    position x=0 y=0
-    focus-at-startup
+output "ViewSonic Corporation VG2448 V5E193900544" {
+    mode "1920x1080@60.000"
+    scale 1
+    transform "90"
+    position x=-1080 y=-125
+    variable-refresh-rate on-demand=true
+    hot-corners {
+        off
+    }
 }

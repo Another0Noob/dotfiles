@@ -1,6 +1,6 @@
 function abbreviations
     abbr --add cd z
-    abbr --add man batman
+    # abbr --add man batman
     abbr --add find fd
     abbr --add ls 'eza --icons'
     abbr --add ll 'eza --icons -l'

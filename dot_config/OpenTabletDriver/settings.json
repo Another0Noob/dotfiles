@@ -1,5 +1,5 @@
 {
-  "Revision": "0.6.6.2",
+  "Revision": "0.6.7",
   "Profiles": [
     {
       "Tablet": "XP-Pen Star G640S",
@@ -90,8 +90,10 @@
         "MouseButtons": [],
         "MouseScrollUp": null,
         "MouseScrollDown": null,
+        "WheelBindings": [],
         "DisablePressure": false,
-        "DisableTilt": false
+        "DisableTilt": false,
+        "EnableDragBindings": false
       }
     },
     {
@@ -104,10 +106,10 @@
       "Filters": [],
       "AbsoluteModeSettings": {
         "Display": {
-          "Width": 2133.0,
-          "Height": 1200.0,
-          "X": 2147.0,
-          "Y": 823.0,
+          "Width": 2226.0,
+          "Height": 1252.0,
+          "X": 2193.0,
+          "Y": 746.0,
           "Rotation": 0.0
         },
         "Tablet": {
@@ -176,8 +178,10 @@
         "MouseButtons": [],
         "MouseScrollUp": null,
         "MouseScrollDown": null,
+        "WheelBindings": [],
         "DisablePressure": false,
-        "DisableTilt": false
+        "DisableTilt": false,
+        "EnableDragBindings": false
       }
     }
   ],
