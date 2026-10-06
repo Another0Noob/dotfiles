@@ -8,8 +8,8 @@
 #════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 #	AUTH: John Smith (FLT)
 #	DATE: 2024-10-26
-#	VERS: 0.4.1
-#	DESC: Get Genshin Impact Wish URL for uploading to paimon.moe and ZZZ Signal URL for rng.moe
+#	VERS: 0.5
+#	DESC: Get Genshin Impact/Zenless Zone Zero Wish/Signal URL to upload to paimon.moe & zzz.rng.moe
 #	LINK: https://gamebanana.com/scripts/12245 (Script documentation on GameBanana)
 #	LISC: GPLv3 (https://www.gnu.org/licenses/gpl.html)
 #	CHANGELOG: (Date - Changes)
@@ -18,63 +18,126 @@
 #		2024-12-31 - Update to Banner Version 5.3 Phase 1
 #		2025-01-10 - Add support for ZZZ and an auto-detect feature for the latest DATA_2 PATH (Ex. Auto-Detect: 2.33.0.0, 2.XX.0.0) | Added GPLv3 License link.
 #		2025-03-04 - Add a link to the script documentation on GB
+#		2026-06-30 - Rewrite script and add autodetect without manual PATH input. (You can still use manual paths as a fallback)
 
 #════════════════════════
 #════════ Colors ════════
 #════════════════════════
-COLOR_NO="\e[0m"
-COLOR_RED="\e[1;31m"
-COLOR_GRE="\e[1;32m"
-COLOR_YEL="\e[1;33m"
-COLOR_BLU="\e[1;34m"
-COLOR_MAG="\e[1;35m"
-COLOR_CYA="\e[1;36m"
-COLOR_GRA="\e[1;37m"
+# Colors : 0=None 1=Red 2=Green 3=Yellow 4=Blue 5=Magenta 6=Cyan 7=Gray
+COLORS=("\e[0m" "\e[1;31m" "\e[1;32m" "\e[1;33m" "\e[1;34m" "\e[1;35m" "\e[1;36m" "\e[1;37m")
 
 #═══════════════════════════
 #════════ Functions ════════
 #═══════════════════════════
 HELP_ME() {
-  echo "This is a help function."
+  SPACER
+  echo -e "$(
+    cat <<EOF
+${COLORS[6]}NAME${COLORS[0]}
+  $_SCRIPT_NAME - Get Genshin Impact/Zenless Zone Zero Wish/Signal URL to upload history to paimon.moe & zzz.rng.moe
+
+${COLORS[7]}USAGE${COLORS[0]}
+  $_SCRIPT_NAME
+
+  $_SCRIPT_NAME -h -v -C -g -z
+
+  (Supports using ONLY SINGLE options. SCRIPT_NAME -h or SCRIPT_NAME -v NOT SCRIPT_NAME -h -v or SCRIPT_NAME -hv)
+
+${COLORS[7]}OPTIONS${COLORS[0]}
+  -h
+            Show this help screen
+  -v
+            Show script version
+  -C
+            Color test function
+  -g
+            Get Genshin Impact wish URL using a manual PATH
+  -z
+            Get Zenless Zone Zero signal URL using a manual PATH
+EOF
+  )"
+  exit 0
+}
+
+GET_VERSION() {
+  # Print script version with the -v option
+  echo -e "${COLORS[7]}$_SCRIPT_NAME Version:${COLORS[6]} $(sed -n -e 's|.*VERS: \(.*\)|\1|p' "$(realpath "$0")" | head -1)${COLORS[0]}"
   exit 0
 }
 
 SPACER() {
+  # You can change the look of the spacer by replacing the _SPACER_LOOK variable with something like a hyphen (-) or an equals sign (=) or another character of your choosing
+  # Changing this variable will make the separator look something like this: ════════ → ======= → --------
+  _SPACER_LOOK="═"
   COLUMN_COUNT="$(tput cols)"
-  for i in $(seq $COLUMN_COUNT); do
-    echo -n "═"
+  echo -ne "${COLORS[4]}"
+  for _i in $(seq "$COLUMN_COUNT"); do
+    echo -n "$_SPACER_LOOK"
   done
+  echo -ne "${COLORS[0]}"
   echo
 }
 
-URL_GENSHIN() {
-  SPACER
-  DATA_2_GENSHIN=${PATH_GENSHIN}/$(find "${PATH_GENSHIN}" -maxdepth 1 -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d " " | rev | cut -d "/" -f 1 | rev)/Cache/Cache_Data/data_2
-  echo -e "${COLOR_CYA}Getting ${COLOR_GRA}Genshin ${COLOR_CYA}url from data_2 and copying to clipboard.${COLOR_NO}"
-  echo -e "Last Modified: ${COLOR_MAG}$(stat -c %y "$DATA_2_GENSHIN" | cut -c -16)${COLOR_NO}"
-  SPACER
-  echo -en "${COLOR_YEL}"
-  grep -a "https://gs.hoyoverse.com/genshin/event/e20190909gacha-v3/.*hk4e_global" "$DATA_2_GENSHIN" | strings | grep "https://gs.hoyoverse.com/genshin/event/e20190909gacha-v3/.*hk4e_global" | tail -1 | sed -n "s:1/0/::p"
-  echo -en "${COLOR_NO}"
-  SPACER
-  grep -a "https://gs.hoyoverse.com/genshin/event/e20190909gacha-v3/.*hk4e_global" "$DATA_2_GENSHIN" | strings | grep "https://gs.hoyoverse.com/genshin/event/e20190909gacha-v3/.*hk4e_global" | tail -1 | sed -n "s:1/0/::p" | wl-copy
-  echo -e "${COLOR_GRE}Link copied to clipboard!${COLOR_NO}"
-  SPACER
+COLORS_TEST() {
+  # Preview colors with the -C option. The hardcoded colors are in the COLORS array at the start of the script, look online for ANSI escape codes and how to use arrays if you wish to change them.
+  echo -e "${COLORS[7]}Index - Color${COLORS[0]}"
+  for IND_COLOR in "${!COLORS[@]}"; do
+    echo -e "$IND_COLOR - ${COLORS[$IND_COLOR]}COLOR ███████${COLORS[0]}"
+  done
   exit 0
 }
 
-URL_ZENLESS() {
+DETECT_SESSION() {
+  # Detect if we're running in a wayland or X11 session using systemd. Defaults to xsel clipboard if we error out (ex. no systemd)
+  MY_SESSION="$(loginctl show-session auto -p Type)"
+  if [[ $MY_SESSION =~ wayland ]]; then
+    SESSION_CLIPBOARD="wl-copy"
+  elif [[ $MY_SESSION =~ x11 ]]; then
+    SESSION_CLIPBOARD="xsel -b"
+  else
+    SESSION_CLIPBOARD="xsel -b"
+    echo -e "${COLORS[3]}WARNING! Could not get current session using function ${COLORS[6]}DETECT_SESSION.${COLORS[3]} Defaulting to xsel clipboard!${COLORS[0]}"
+  fi
+}
+
+DETECT_GAME() {
+  # Detect which of the two games is running and set the PATH for the script to use.
+  # What the script is doing:
+  # Get the game process id and look up it's real path to autofill the PATH that we need. Set the game title using an array. Error out if we can't detect the game running.
+  # Finally, run our main function to get the URL
+  if pgrep -f "GenshinImpact.exe" &>/dev/null; then
+    GAME_PROC="$(pgrep -f "GenshinImpact.exe")"
+    GAME_PATH="$(realpath /proc/"$GAME_PROC"/cwd)/GenshinImpact_Data/webCaches"
+    GAME_TITLE="${GAME_TITLES[0]}"
+  elif pgrep -f "ZenlessZoneZero.exe" &>/dev/null; then
+    GAME_PROC="$(pgrep -f "ZenlessZoneZero.exe")"
+    GAME_PATH="$(realpath /proc/"$GAME_PROC"/cwd)/ZenlessZoneZero_Data/webCaches"
+    GAME_TITLE="${GAME_TITLES[1]}"
+  else
+    echo -e "${COLORS[1]}ERROR! Couldn't detect Genshin/Zenless running!${COLORS[0]}"
+    exit 0
+  fi
+  echo -e "${COLORS[7]}Auto-detected: ${COLORS[6]}$GAME_TITLE${COLORS[0]}"
+  GET_URL
+}
+
+GET_URL() {
+  # Basically the same things are being done, just simplified.
+  # 1. Detect if we're in a wayland/x11 session to decide what clipboard to use. Set the PATH for the data_2 file and get it's last modification time.
+  # 2. Directly convert the binary data_2 file to plaintext, pipe it to grep and filter for the urls we want. Get the last url with tail and remove a '1/0/' at the start of the url.
+  # 3. Get the url with only the parts that we actually need by filtering with grep and remove the newlines in grep's output with tr and print it on the terminal
+  # 4. Finally, do steps 2 & 3 again, but copy it into our clipboard without displaying it on the terminal.
+  DETECT_SESSION
   SPACER
-  DATA_2_ZENLESS=${PATH_ZENLESS}/$(find "${PATH_ZENLESS}" -maxdepth 1 -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d " " | rev | cut -d "/" -f 1 | rev)/Cache/Cache_Data/data_2
-  echo -e "${COLOR_CYA}Getting ${COLOR_GRA}Zenless ${COLOR_CYA}url from data_2 and copying to clipboard.${COLOR_NO}"
-  echo -e "Last Modified: ${COLOR_MAG}$(stat -c %y "$DATA_2_ZENLESS" | cut -c -16)${COLOR_NO}"
+  GAME_DATA2=$(find "${GAME_PATH}" -maxdepth 1 -type d -mtime -1 | sort | tail -1)/Cache/Cache_Data/data_2
+  echo -e "${COLORS[7]}Getting ${COLORS[6]}$GAME_TITLE ${COLORS[7]}url from data_2 and copying to clipboard.${COLORS[0]}"
+  echo -e "${COLORS[7]}Last Modified: ${COLORS[5]}$(stat -c %y "$GAME_DATA2" | sed "s:\..*::")${COLORS[0]}"
   SPACER
-  echo -en "${COLOR_YEL}"
-  grep -a "https.*getGachaLog" "$DATA_2_ZENLESS" | strings | grep "https.*getGachaLog" | tail -1 | sed -n "s:1/0/::p"
-  echo -en "${COLOR_NO}"
-  SPACER
-  grep -a "https.*getGachaLog" "$DATA_2_ZENLESS" | strings | grep "https.*getGachaLog" | tail -1 | sed -n "s:1/0/::p" | wl-copy
-  echo -e "${COLOR_GRE}Link copied to clipboard!${COLOR_NO}"
+  echo -en "${COLORS[3]}"
+  strings "$GAME_DATA2" | grep -E 'public-operation-hk4e|common-sg' | tail -1 | sed 's:1/0/::' | grep -o -i -E '.*getGachaLog\?|authkey_ver=[0-9]+|&sign_type=[0-9]+|&game_biz=[a-z0-9_]+|&lang=[a-z]+|&authkey=[a-z0-9%]+' | tr -d '\n'
+  echo -e "${COLORS[0]}"
+  strings "$GAME_DATA2" | grep -E 'public-operation-hk4e|common-sg' | tail -1 | sed 's:1/0/::' | grep -o -i -E '.*getGachaLog\?|authkey_ver=[0-9]+|&sign_type=[0-9]+|&game_biz=[a-z0-9_]+|&lang=[a-z]+|&authkey=[a-z0-9%]+' | tr -d '\n' | $SESSION_CLIPBOARD
+  echo -e "${COLORS[2]}Link copied to clipboard!${COLORS[0]}"
   SPACER
   exit 0
 }
@@ -82,23 +145,69 @@ URL_ZENLESS() {
 #═══════════════════════════
 #════════ Variables ════════
 #═══════════════════════════
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# CHANGE THIS TO YOUR ACTUAL FILEPATH
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-PATH_GENSHIN=$HOME/.local/share/Steam/steamapps/compatdata/2360334159/pfx/drive_c/Program\ Files/HoYoPlay/games/Genshin\ Impact\ game/GenshinImpact_Data/webCaches/
-PATH_ZENLESS=$HOME/Games/Files/ZenlessZoneZero\ Game/ZenlessZoneZero_Data/webCaches
+# Get the scripts name without hardcoding it into the script itself. (Helps with keeping the help info consistant despite the scripts name.)
+# Set the game titles/names that we display. Can be changed to whatever you want, as long as the order stays the same ("GENSHIT" "YENLESS")
+# You can manually set the PATHs for the games if the autodetect feature is not working or if you want to use the script while the game is not running (for whatever reason).
+# After you set the path manually, simply run the script with either option SCRIPT_NAME -g or SCRIPT_NAME -z
+# You do not need to escape spaces/some symbols so long as the path stays within the "". Don't use "~/". Use "$HOME/".
+# You only need to keep "GAME_NAME game/GAME_NAME_Data/webCaches" because of the game file structure. Ending with/without "/" after "webCaches" doesn't matter, so long as that's where it ends.
+# Examples:
+# PATH_GENSHIN="$HOME/Games/Genshin Impact game/GenshinImpact_Data/webCaches/"
+# PATH_ZENLESS="/media/USER/MOUNT/Games/ZenlessZoneZero Game/ZenlessZoneZero_Data/webCaches"
+_SCRIPT_NAME="$(basename "$0")"
+GAME_TITLES=("Genshin Impact" "Zenless Zone Zero")
+PATH_GENSHIN=""
+PATH_ZENLESS=""
 
 #═════════════════════════════
 #════════ Main Script ════════
 #═════════════════════════════
-if [[ -z $1 ]]; then
-  URL_GENSHIN
-elif [[ $1 == g ]]; then
-  URL_GENSHIN
-elif [[ $1 == z ]]; then
-  URL_ZENLESS
+
+# By default, the script will always run with the autodetect feature enabled. This will detect which game is running and get the URL based on the game without having to manually set PATHs.
+# Simply having either game open (plus loading the wish/signal history in-game) will determine where to look for the URL.
+# If you wish to not use the autodetect feature or the autodetect is not working, you can manually set the PATHs above and simply run the script with the options -g or -z Ex. SCRIPT_NAME -g or SCRIPT_NAME -z
+# The other options are simply a small (basically useless) help info section, a script version display, and the color preview.
+while getopts "hvCgz" flag; do
+  case $flag in
+  C)
+    COLORS_TEST
+    ;;
+  h)
+    HELP_ME
+    ;;
+  v)
+    GET_VERSION
+    ;;
+  g)
+    if [[ -z $PATH_GENSHIN ]]; then
+      echo -e "${COLORS[1]}ERROR! ${COLORS[5]}PATH_GENSHIN${COLORS[1]} variable is empty! ${COLORS[3]}Please set this variable if you wish to use this function!${COLORS[0]}"
+      exit 0
+    else
+      :
+    fi
+    GAME_PATH="$PATH_GENSHIN"
+    GAME_TITLE="${GAME_TITLES[0]}"
+    GET_URL
+    ;;
+  z)
+    if [[ -z $PATH_ZENLESS ]]; then
+      echo -e "${COLORS[1]}ERROR! ${COLORS[5]}PATH_ZENLESS${COLORS[1]} variable is empty! ${COLORS[3]}Please set this variable if you wish to use this function!${COLORS[0]}"
+      exit 0
+    else
+      :
+    fi
+    GAME_PATH="$PATH_ZENLESS"
+    GAME_TITLE="${GAME_TITLES[1]}"
+    GET_URL
+    ;;
+  ?)
+    exit 1
+    ;;
+  esac
+done
+
+if [[ -z $INPUT ]]; then
+  DETECT_GAME
 else
   HELP_ME
 fi
-

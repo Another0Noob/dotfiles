@@ -18,10 +18,10 @@ binds {
     Mod+Shift+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+E { spawn "dolphin"; }
-    Mod+S { spawn "ghostty" "-e" "fish" "-C" "y"; }
-    Ctrl+Shift+Escape { spawn "ghostty" "-e" "btop"; }
+    // Mod+S { spawn "ghostty" "-e" "fish" "-C" "y"; }
+    Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Mod+X { spawn "firefox"; }
-    Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    // Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
     Super+Shift+D hotkey-overlay-title="edit screenshot" { spawn-sh "set -e; grim -t ppm -g \"$(slurp -o -d -F monospace)\" - | satty --filename - --copy-command=wl-copy --annotation-size-factor 2.0 --output-filename=\"$(xdg-user-dir PICTURES)/Screenshots/Screenshot from %Y-%m-%d %H:%M:%S.png\" --actions-on-enter=\"save-to-clipboard,exit\" --brush-smooth-history-size=5 --disable-notifications"; }
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -252,9 +252,9 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Mod+Shift+S { screenshot show-pointer=false; }
-    Mod+Shift+W { screenshot-screen show-pointer=false; }
-    Mod+Shift+A { screenshot-window; }
+    Mod+S { screenshot show-pointer=false; }
+    Mod+Shift+A { screenshot-screen show-pointer=false; }
+    Mod+A { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
